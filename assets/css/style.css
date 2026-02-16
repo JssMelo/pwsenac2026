@@ -352,3 +352,31 @@ footer{
   background:var(--cor-primaria-hover);
   transform:scale(1.03);
 }
+
+.admin-nav {
+  background: #111827;
+}
+
+.admin-nav a {
+  color: #fff;
+}
+
+.header-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo a{
+  text-decoration:none;
+  color:white;
+}
+
+.admin-header{
+  background:#111827;
+}
+
+.admin-user{
+  color:white;
+  font-size:14px;
+}

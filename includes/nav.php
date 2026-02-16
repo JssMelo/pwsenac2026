@@ -1,42 +1,40 @@
 <?php
-$currentPage = basename($_SERVER['PHP_SELF']);
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 
 <nav class="nav">
-    <div class="container">
+    <div class="container nav-container">
+
+        <div class="logo">
+            <a href="<?= BASE_URL ?>public/index.php">Festival do Senhor</a>
+        </div>
 
         <div class="menu-toggle">☰</div>
 
         <ul class="menu">
 
             <li>
-                <a class="<?= $currentPage == 'index.php' ? 'active' : '' ?>"
-                   href="<?= BASE_URL ?>public/index.php">Início</a>
+                <a href="<?= BASE_URL ?>public/index.php">Início</a>
             </li>
 
             <li>
-                <a class="<?= $currentPage == 'programacao.php' ? 'active' : '' ?>"
-                   href="<?= BASE_URL ?>public/programacao.php">Programação</a>
+                <a href="<?= BASE_URL ?>public/programacao.php">Programação</a>
             </li>
 
             <li>
-                <a class="<?= $currentPage == 'cadastro.php' ? 'active' : '' ?>"
-                   href="<?= BASE_URL ?>public/cadastro.php">Cadastro</a>
+                <a href="<?= BASE_URL ?>public/cadastro.php">Cadastro</a>
             </li>
 
             <li>
-                <a class="<?= $currentPage == 'participantes.php' ? 'active' : '' ?>"
-                   href="<?= BASE_URL ?>public/participantes.php">Participantes</a>
+                <a href="<?= BASE_URL ?>public/participantes.php">Participantes</a>
             </li>
 
-            <?php if (isset($_SESSION['admin_id'])): ?>
+            <?php if (isset($_SESSION['admin'])): ?>
 
                 <li>
                     <a href="<?= BASE_URL ?>admin/dashboard.php">Dashboard</a>
-                </li>
-
-                <li>
-                    <a href="<?= BASE_URL ?>admin/programacao.php">Programação ADM</a>
                 </li>
 
                 <li>
@@ -46,7 +44,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             <?php else: ?>
 
                 <li>
-                    <a href="<?= BASE_URL ?>public/login.php">Login</a>
+                    <a href="<?= BASE_URL ?>public/login.php">Login ADM</a>
                 </li>
 
             <?php endif; ?>

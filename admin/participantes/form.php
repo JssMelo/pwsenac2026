@@ -80,7 +80,7 @@ if ($_POST) {
 ?>
 
 <?php include '../includes/header.php'; ?>
-<?php include '../includes/nav.php'; ?>
+<?php require_once __DIR__ . '/../includes/admin-nav.php'; ?>
 
 <main>
 

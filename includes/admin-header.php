@@ -1,6 +1,6 @@
 <?php
 if (!isset($pageTitle)) {
-    $pageTitle = "Festival do Senhor";
+    $pageTitle = "Painel Administrativo";
 }
 ?>
 <!DOCTYPE html>
@@ -9,21 +9,26 @@ if (!isset($pageTitle)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?= $pageTitle ?></title>
+    <title><?= $pageTitle ?> | ADM</title>
 
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
 </head>
 
 <body>
 
-<header class="top-header">
+<header class="top-header admin-header">
     <div class="container header-container">
 
         <h1 class="logo">
-            <a href="<?= BASE_URL ?>public/index.php">
-                Festival do Senhor
+            <a href="<?= BASE_URL ?>admin/dashboard.php">
+                Painel Administrativo
             </a>
         </h1>
+
+        <div class="admin-user">
+            Logado como:
+            <strong><?= $_SESSION['admin'] ?? 'Administrador' ?></strong>
+        </div>
 
     </div>
 </header>
