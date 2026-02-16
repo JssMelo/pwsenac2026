@@ -1,40 +1,73 @@
 <?php
-require 'includes/config.php';
-$programacao = $pdo->query("
-    SELECT * FROM programacao 
+$pageTitle = "Programação";
+require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../includes/nav.php';
+
+$sql = $pdo->query("
+    SELECT *
+    FROM programacao
     ORDER BY data, hora
 ");
+
+$programacao = $sql->fetchAll();
+
+// agrupar por data
+$agenda = [];
+
+foreach ($programacao as $item) {
+    $agenda[$item['data']][] = $item;
+}
 ?>
 
-<?php include 'includes/header.php'; ?>
-<?php include 'includes/nav.php'; ?>
+<main class="container">
 
-<main>
+    <h2>Programação do Evento</h2>
 
-<h2>Programação do Evento</h2>
+    <?php if ($agenda): ?>
 
-<div class="programacao">
+        <?php foreach ($agenda as $data => $atividades): ?>
 
-<?php foreach($programacao as $item): ?>
+            <div class="programacao-dia">
 
-<div class="prog-card">
+                <h3 class="data-titulo">
+                    <?= date('d/m/Y', strtotime($data)) ?>
+                </h3>
 
-<div class="prog-data">
-<?= date('d/m/Y', strtotime($item['data'])) ?>
-</div>
+                <?php foreach ($atividades as $item): ?>
 
-<div class="prog-info">
-<h3><?= $item['atividade'] ?></h3>
-<p><strong>Horário:</strong> <?= date('H:i', strtotime($item['hora'])) ?></p>
-<p><strong>Responsável:</strong> <?= $item['responsavel'] ?></p>
-</div>
+                    <div class="prog-card">
 
-</div>
+                        <div class="prog-hora">
+                            <?= date('H:i', strtotime($item['hora'])) ?>
+                        </div>
 
-<?php endforeach; ?>
+                        <div class="prog-info">
 
-</div>
+                            <h4><?= htmlspecialchars($item['atividade']) ?></h4>
+
+                            <?php if ($item['responsavel']): ?>
+                                <p>
+                                    <strong>Responsável:</strong>
+                                    <?= htmlspecialchars($item['responsavel']) ?>
+                                </p>
+                            <?php endif; ?>
+
+                        </div>
+
+                    </div>
+
+                <?php endforeach; ?>
+
+            </div>
+
+        <?php endforeach; ?>
+
+    <?php else: ?>
+
+        <p>Nenhuma programação cadastrada ainda.</p>
+
+    <?php endif; ?>
 
 </main>
 
-<?php include 'includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>

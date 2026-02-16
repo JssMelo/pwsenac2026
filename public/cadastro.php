@@ -1,37 +1,78 @@
 <?php
-require 'includes/config.php';
+$pageTitle = "Cadastro de Participante";
+require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../includes/nav.php';
 
-if ($_POST) {
+$sucesso = '';
+$erro = '';
 
-$sql = $pdo->prepare("INSERT INTO participantes 
-(nome,email,telefone,cidade,doacao,observacao)
-VALUES (?,?,?,?,?,?)");
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-$sql->execute([
-$_POST['nome'],
-$_POST['email'],
-$_POST['telefone'],
-$_POST['cidade'],
-$_POST['doacao'],
-$_POST['observacao']
-]);
+    $nome       = trim($_POST['nome']);
+    $email      = trim($_POST['email']);
+    $telefone   = trim($_POST['telefone']);
+    $cidade     = trim($_POST['cidade']);
+    $doacao     = trim($_POST['doacao']);
+    $observacao = trim($_POST['observacao']);
 
+    if ($nome) {
+
+        $sql = $pdo->prepare("
+            INSERT INTO participantes
+            (nome, email, telefone, cidade, doacao, observacao)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ");
+
+        $sql->execute([
+            $nome,
+            $email,
+            $telefone,
+            $cidade,
+            $doacao ?: null,
+            $observacao
+        ]);
+
+        $sucesso = "Cadastro realizado com sucesso!";
+    } else {
+        $erro = "O nome é obrigatório.";
+    }
 }
 ?>
 
-<?php include 'includes/header.php'; ?>
-<?php include 'includes/nav.php'; ?>
+<main class="container">
 
-<main>
-<form method="POST">
-<input name="nome" placeholder="Nome" required>
-<input name="email" placeholder="Email">
-<input name="telefone" placeholder="Telefone">
-<input name="cidade" placeholder="Cidade">
-<input name="doacao" placeholder="Doação">
-<textarea name="observacao" placeholder="Observações"></textarea>
-<button class="btn">Cadastrar</button>
-</form>
+    <div class="form-box">
+
+        <h2>Cadastro de Participante</h2>
+
+        <?php if ($sucesso): ?>
+            <p class="sucesso"><?= $sucesso ?></p>
+        <?php endif; ?>
+
+        <?php if ($erro): ?>
+            <p class="erro"><?= $erro ?></p>
+        <?php endif; ?>
+
+        <form method="POST">
+
+            <input name="nome" placeholder="Nome" required>
+
+            <input type="email" name="email" placeholder="Email">
+
+            <input name="telefone" placeholder="Telefone">
+
+            <input name="cidade" placeholder="Cidade">
+
+            <input type="number" step="0.01" name="doacao" placeholder="Valor da Doação (R$)">
+
+            <textarea name="observacao" placeholder="Observações"></textarea>
+
+            <button class="btn">Cadastrar</button>
+
+        </form>
+
+    </div>
+
 </main>
 
-<?php include 'includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>

@@ -2,9 +2,21 @@
 require '../includes/auth.php';
 require '../includes/config.php';
 
-$id = $_GET['id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-$sql = $pdo->prepare("DELETE FROM participantes WHERE id=?");
-$sql->execute([$id]);
+    $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+
+    if ($id) {
+
+        $sql = $pdo->prepare("DELETE FROM participantes WHERE id = ?");
+        $sql->execute([$id]);
+
+        $_SESSION['msg'] = "Participante excluído com sucesso!";
+    } else {
+        $_SESSION['msg'] = "ID inválido.";
+    }
+
+}
 
 header("Location: participantes.php");
+exit;
