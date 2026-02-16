@@ -1,4 +1,9 @@
 <?php
+
+// ===== URL BASE DO PROJETO =====
+define('BASE_URL', 'http://localhost/pwsenac2026/');
+
+// ===== CONFIG BANCO =====
 $host = "localhost";
 $db   = "festival";
 $user = "root";
@@ -8,5 +13,5 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
-    echo "Erro na conexão: " . $e->getMessage();
+    die("Erro na conexão: " . $e->getMessage());
 }

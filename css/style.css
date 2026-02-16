@@ -214,3 +214,43 @@ footer {
   }
 
 }
+
+.programacao {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.prog-card {
+  display: flex;
+  background: white;
+  border-radius: var(--borda);
+  box-shadow: var(--sombra);
+  overflow: hidden;
+}
+
+.prog-data {
+  background: var(--cor-primaria);
+  color: white;
+  padding: 20px;
+  font-weight: bold;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prog-info {
+  padding: 15px;
+}
+
+@media (max-width: 768px) {
+  .prog-card {
+    flex-direction: column;
+  }
+
+  .prog-data {
+    min-width: 100%;
+  }
+}
+
