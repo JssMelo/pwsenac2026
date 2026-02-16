@@ -1,4 +1,10 @@
 <?php
+if (!defined('BASE_URL')) {
+    require_once __DIR__ . '/config.php';
+}
+?>
+
+<?php
 if (!isset($pageTitle)) {
     $pageTitle = "Festival do Senhor";
 }
