@@ -1,73 +1,112 @@
 <?php
+require_once __DIR__ . '/../includes/config.php';
+
 $pageTitle = "Participantes";
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../includes/nav.php';
 
-// lista participantes
+/* =========================
+   LISTA DE PARTICIPANTES
+========================= */
 $sql = $pdo->query("
     SELECT nome, cidade, doacao
     FROM participantes
     ORDER BY created_at DESC
 ");
 
-$participantes = $sql->fetchAll();
+$participantes = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-// estatísticas
+/* =========================
+   ESTATÍSTICAS
+========================= */
 $total = $pdo->query("SELECT COUNT(*) FROM participantes")->fetchColumn();
-$totalDoacoes = $pdo->query("SELECT SUM(doacao) FROM participantes")->fetchColumn();
+
+$totalDoacoes = $pdo->query("
+    SELECT COALESCE(SUM(doacao), 0)
+    FROM participantes
+")->fetchColumn();
 ?>
 
 <main class="container">
 
-    <h2>Lista de Participantes</h2>
+    <section class="card">
 
-    <div class="stats">
+        <h2>Lista de Participantes</h2>
 
-        <div class="stat-box">
-            <strong><?= $total ?></strong>
-            <span>Inscritos</span>
+        <!-- STATS -->
+        <div class="cards">
+
+            <div>
+                <strong><?= $total ?></strong><br>
+                Inscritos
+            </div>
+
+            <div>
+                <strong>
+                    R$ <?= number_format((float)$totalDoacoes, 2, ',', '.') ?>
+                </strong><br>
+                Doações
+            </div>
+
         </div>
 
-        <div class="stat-box">
-            <strong>R$ <?= number_format($totalDoacoes, 2, ',', '.') ?></strong>
-            <span>Doações</span>
-        </div>
+    </section>
 
-    </div>
+    <section class="card">
 
-    <?php if ($participantes): ?>
+        <?php if ($participantes): ?>
 
-        <div class="table-responsive">
+            <div class="table-responsive">
 
-            <table class="tabela">
+                <table>
 
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Cidade</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    <?php foreach ($participantes as $p): ?>
+                    <thead>
                         <tr>
-                            <td><?= htmlspecialchars($p['nome']) ?></td>
-                            <td><?= htmlspecialchars($p['cidade']) ?></td>
+                            <th>Nome</th>
+                            <th>Cidade</th>
+                            <th>Doação</th>
                         </tr>
-                    <?php endforeach; ?>
+                    </thead>
 
-                </tbody>
+                    <tbody>
 
-            </table>
+                        <?php foreach ($participantes as $p): ?>
+                            <tr>
 
-        </div>
+                                <td>
+                                    <?= htmlspecialchars($p['nome']) ?>
+                                </td>
 
-    <?php else: ?>
+                                <td>
+                                    <?= htmlspecialchars($p['cidade']) ?>
+                                </td>
 
-        <p>Nenhum participante cadastrado ainda.</p>
+                                <td>
+                                    <?php if (!empty($p['doacao'])): ?>
+                                        R$ <?= number_format((float)$p['doacao'], 2, ',', '.') ?>
+                                    <?php else: ?>
+                                        —
+                                    <?php endif; ?>
+                                </td>
 
-    <?php endif; ?>
+                            </tr>
+                        <?php endforeach; ?>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        <?php else: ?>
+
+            <div class="alert">
+                Nenhum participante cadastrado ainda.
+            </div>
+
+        <?php endif; ?>
+
+    </section>
 
 </main>
 

@@ -6,9 +6,17 @@ $pageTitle = "Dashboard ADM";
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../includes/nav.php';
 
-// métricas
+// =====================
+// MÉTRICAS
+// =====================
+
 $totalParticipantes = $pdo->query("SELECT COUNT(*) FROM participantes")->fetchColumn();
-$totalDoacoes = $pdo->query("SELECT SUM(doacao) FROM participantes")->fetchColumn();
+
+$totalDoacoes = $pdo->query("
+    SELECT COALESCE(SUM(doacao), 0) 
+    FROM participantes
+")->fetchColumn();
+
 $totalEventos = $pdo->query("SELECT COUNT(*) FROM programacao")->fetchColumn();
 ?>
 
@@ -16,38 +24,36 @@ $totalEventos = $pdo->query("SELECT COUNT(*) FROM programacao")->fetchColumn();
 
     <h2>Painel Administrativo</h2>
 
-    <div class="cards">
+    <section class="cards-dashboard">
 
         <div class="card-dashboard">
-            <span>Total de Inscritos</span>
+            <span>👥 Total de Inscritos</span>
             <strong><?= $totalParticipantes ?></strong>
         </div>
 
         <div class="card-dashboard">
-            <span>Total em Doações</span>
-            <strong>
-                R$ <?= number_format($totalDoacoes, 2, ',', '.') ?>
-            </strong>
+            <span>💰 Total em Doações</span>
+            <strong>R$ <?= number_format((float)$totalDoacoes, 2, ',', '.') ?></strong>
         </div>
 
         <div class="card-dashboard">
-            <span>Atividades Programadas</span>
+            <span>📅 Atividades Programadas</span>
             <strong><?= $totalEventos ?></strong>
         </div>
 
-    </div>
+    </section>
 
-    <div class="atalhos">
+    <section class="atalhos-dashboard">
 
-        <a href="<?= BASE_URL ?>admin/participantes.php" class="btn">
+        <a href="<?= BASE_URL ?>admin/participantes.php" class="btn-dashboard">
             Gerenciar Participantes
         </a>
 
-        <a href="<?= BASE_URL ?>admin/programacao.php" class="btn">
+        <a href="<?= BASE_URL ?>admin/programacao.php" class="btn-dashboard">
             Gerenciar Programação
         </a>
 
-    </div>
+    </section>
 
 </main>
 
