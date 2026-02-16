@@ -1,6 +1,6 @@
 <?php
-require '../includes/auth.php';
-require '../includes/config.php';
+require_once(__DIR__ . '/../../includes/auth.php');
+require_once(__DIR__ . '/../../includes/config.php');
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
@@ -57,13 +57,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['msg'] = "Programação cadastrada com sucesso!";
     }
 
-    header("Location: programacao.php");
+    header("Location: index.php");
     exit;
 }
 ?>
 
-<?php include '../includes/header.php'; ?>
-<?php include '../includes/nav.php'; ?>
+<?php require_once(__DIR__ . '/../../includes/admin-header.php'); ?>
+<?php require_once(__DIR__ . '/../../includes/admin-nav.php'); ?>
 
 <main class="container">
 
@@ -93,4 +93,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </main>
 
-<?php include '../includes/footer.php'; ?>
+<?php require_once(__DIR__ . '/../../includes/footer.php'); ?>

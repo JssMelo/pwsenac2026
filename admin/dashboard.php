@@ -1,11 +1,11 @@
 <?php
-require_once __DIR__ . '/../../includes/auth.php';
-require_once __DIR__ . '/../../includes/config.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/config.php';
 
 $pageTitle = "Dashboard";
 
-require_once __DIR__ . '/../../includes/admin-header.php';
-require_once __DIR__ . '/../../includes/admin-nav.php';
+require_once(__DIR__ . '/../includes/admin-header.php');;
+require_once(__DIR__ . '/../includes/admin-nav.php');
 
 
 // =====================
@@ -51,7 +51,7 @@ $totalEventos = $pdo->query("SELECT COUNT(*) FROM programacao")->fetchColumn();
             Gerenciar Participantes
         </a>
 
-        <a href="<?= BASE_URL ?>admin/programacao.php" class="btn-dashboard">
+        <a href="<?= BASE_URL ?>admin/programacao/index.php" class="btn-dashboard">
             Gerenciar Programação
         </a>
 

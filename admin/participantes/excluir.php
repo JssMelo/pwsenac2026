@@ -1,6 +1,6 @@
 <?php
-require '../includes/auth.php';
-require '../includes/config.php';
+require_once(__DIR__ . '/../../includes/auth.php');;
+require_once(__DIR__ . '/../../includes/config.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -18,5 +18,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 
-header("Location: participantes.php");
+header("Location: index.php");
 exit;

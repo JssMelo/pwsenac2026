@@ -1,6 +1,6 @@
 <?php
-require '../includes/auth.php';
-require '../includes/config.php';
+require_once(__DIR__ . '/../../includes/auth.php');;
+require_once(__DIR__ . '/../../includes/config.php');
 
 $id = null;
 $nome = '';
@@ -74,13 +74,13 @@ if ($_POST) {
         ]);
     }
 
-    header("Location: participantes.php");
+    header("Location: index.php");
     exit;
 }
 ?>
 
-<?php include '../includes/header.php'; ?>
-<?php require_once __DIR__ . '/../includes/admin-nav.php'; ?>
+<?php require_once(__DIR__ . '/../../includes/admin-header.php'); ?>
+<?php require_once(__DIR__ . '/../../includes/admin-nav.php'); ?>
 
 <main>
 
@@ -115,4 +115,4 @@ value="<?= htmlspecialchars($doacao) ?>">
 
 </main>
 
-<?php include '../includes/footer.php'; ?>
+<?php require_once(__DIR__ . '/../../includes/footer.php'); ?>

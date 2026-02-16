@@ -1,16 +1,16 @@
 <?php
-require '../includes/auth.php';
-require '../includes/config.php';
+require_once(__DIR__ . '/../../includes/auth.php');;
+require_once(__DIR__ . '/../../includes/config.php');
 
 $dados = $pdo->query("SELECT * FROM participantes ORDER BY nome");
 ?>
 
-<?php include '../includes/header.php'; ?>
-<?php require_once __DIR__ . '/../includes/admin-nav.php'; ?>
+<?php require_once(__DIR__ . '/../../includes/admin-header.php'); ?>
+<?php require_once(__DIR__ . '/../../includes/admin-nav.php'); ?>
 
 <main>
 
-<a href="participante-form.php" class="btn">Novo</a>
+<a href="form.php" class="btn">Novo</a>
 
 <table>
 
@@ -30,7 +30,7 @@ $dados = $pdo->query("SELECT * FROM participantes ORDER BY nome");
 <td><?= htmlspecialchars($p['cidade']) ?></td>
 <td>
 
-<a href="participante-form.php?id=<?= $p['id'] ?>">Editar</a>
+<a href="form.php?id=<?= $p['id'] ?>">Editar</a>
 
 <form method="POST" action="excluir.php" class="inline">
     <input type="hidden" name="id" value="<?= $p['id'] ?>">
@@ -55,4 +55,4 @@ $dados = $pdo->query("SELECT * FROM participantes ORDER BY nome");
 <?php endif; ?>
 
 
-<?php include '../includes/footer.php'; ?>
+<?php require_once(__DIR__ . '/../../includes/footer.php'); ?>

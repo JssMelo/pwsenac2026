@@ -1,6 +1,6 @@
 <?php
-require '../includes/auth.php';
-require '../includes/config.php';
+require_once(__DIR__ . '/../../includes/auth.php');
+require_once(__DIR__ . '/../../includes/config.php');
 
 $dados = $pdo->query("
     SELECT * FROM programacao 
@@ -8,8 +8,8 @@ $dados = $pdo->query("
 ")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<?php include '../includes/header.php'; ?>
-<?php include '../includes/nav.php'; ?>
+<?php require_once(__DIR__ . '/../../includes/admin-header.php'); ?>
+<?php require_once(__DIR__ . '/../../includes/admin-nav.php'); ?>
 
 <main class="container">
 
@@ -21,7 +21,7 @@ $dados = $pdo->query("
     </div>
 <?php endif; ?>
 
-<a href="programacao-form.php" class="btn">Novo</a>
+<a href="form.php" class="btn">Novo</a>
 
 <table>
 
@@ -42,9 +42,9 @@ $dados = $pdo->query("
 
 <td>
 
-<a href="programacao-form.php?id=<?= $p['id'] ?>">Editar</a>
+<a href="form.php?id=<?= $p['id'] ?>">Editar</a>
 
-<form method="POST" action="programacao-excluir.php" style="display:inline;">
+<form method="POST" action="excluir.php" style="display:inline;">
     <input type="hidden" name="id" value="<?= $p['id'] ?>">
     <button onclick="return confirm('Tem certeza que deseja excluir?')">
         Excluir
@@ -61,4 +61,4 @@ $dados = $pdo->query("
 
 </main>
 
-<?p
+<?php require_once(__DIR__ . '/../../includes/footer.php'); ?>
