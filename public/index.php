@@ -35,9 +35,9 @@ require_once __DIR__ . '/../includes/nav.php';
         <h2>Galeria</h2>
 
         <div class="grid-3">
-            <img src="<?= BASE_URL ?>img/foto1.jpg" alt="Faltam 02 dias">
-            <img src="<?= BASE_URL ?>img/foto2.jpg" alt="Faltam 05 dias">
-            <img src="<?= BASE_URL ?>img/foto3.jpg" alt="Tema 2026">
+            <img src="<?= BASE_URL ?>assets/img/foto1.jpg" alt="Faltam 02 dias">
+            <img src="<?= BASE_URL ?>assets/img/foto2.jpg" alt="Faltam 05 dias">
+            <img src="<?= BASE_URL ?>assets/img/foto3.jpg" alt="Tema 2026">
         </div>
     </section>
 

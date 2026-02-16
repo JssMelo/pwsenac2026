@@ -7,10 +7,6 @@ if (session_status() === PHP_SESSION_NONE) {
 <nav class="nav">
     <div class="container nav-container">
 
-        <div class="logo">
-            <a href="<?= BASE_URL ?>public/index.php">Festival do Senhor</a>
-        </div>
-
         <div class="menu-toggle">☰</div>
 
         <ul class="menu">
