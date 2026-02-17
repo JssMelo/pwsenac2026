@@ -1,10 +1,8 @@
 <?php
-
 // ===== URL BASE DO PROJETO =====
 if (!defined('BASE_URL')) {
     define('BASE_URL', 'http://localhost/pwsenac2026/');
 }
-
 
 // ===== CONFIG BANCO =====
 $host = "localhost";

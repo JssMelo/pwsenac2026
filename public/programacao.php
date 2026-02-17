@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../includes/config.php';
 
-$pageTitle = "Programação";
+$pageTitle = "Programação do Festival do Senhor 2026";
 
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../includes/nav.php';
@@ -46,9 +46,7 @@ foreach ($programacao as $item) {
         <?php endforeach; ?>
     <?php else: ?>
         <p>Nenhuma programação cadastrada ainda.</p>
-
     <?php endif; ?>
-
 </main>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

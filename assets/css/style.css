@@ -6,13 +6,13 @@
 }
 
 :root{
-  --cor-primaria:#2d6cdf;
-  --cor-primaria-hover:#1e4fa3;
-  --cor-secundaria:#f4f6fb;
-  --cor-texto:#333;
-  --cor-branca:#fff;
-  --cor-sucesso:#2ecc71;
-  --cor-erro:#e74c3c;
+  --cor-primaria:#7A1C1C; /* vinho */
+  --cor-primaria-hover:#E85C0D; /* laranja */
+  --cor-secundaria:#F9F4E8; /* bege */
+  --cor-texto:#3B2C1A; /* marrom escuro para contraste */
+  --cor-branca:#FFFFFF;
+  --cor-sucesso:#F2B705; /* amarelo mostarda */
+  --cor-erro:#E85C0D; /* laranja avermelhado */
   --borda:8px;
   --sombra:0 2px 8px rgba(0,0,0,0.1);
 }
